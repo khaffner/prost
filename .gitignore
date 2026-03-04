@@ -1,0 +1,13 @@
+# Ignore the .stfolder created by syncthing
+prost-input/.stfolder
+
+# Ignore the assignments.csv file, which is not for github or other people to see
+prost-input/assignments.csv
+
+# Ignore the contents of the scripts folder, except for the nodeinfo.ps1 example
+prost-input/payloads/*
+!prost-input/payloads/nodeinfo.ps1
+
+# Ignore the contents of the prost-output folder, except for the .gitkeep file
+prost-output/*
+!prost-output/.gitkeep
