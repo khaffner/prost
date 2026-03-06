@@ -8,10 +8,10 @@ $global:HostName = & hostname
 
 $SyncthingConfig = & "syncthing" "cli" "config" "dump-json" | ConvertFrom-Json
 $global:OutputFolder = $SyncthingConfig.folders | Where-Object path -like '*prost-output' | Select-Object -ExpandProperty path
-$OutputFolder = $OutputFolder.Replace('~', $SyncthingSystem.tilde) # Resolve tilde if present
+$global:OutputFolder = $global:OutputFolder.Replace('~', $SyncthingSystem.tilde) # Resolve tilde if present
 
 $global:InputFolder = $SyncthingConfig.folders | Where-Object path -like '*prost-input' | Select-Object -ExpandProperty path
-$InputFolder = $InputFolder.Replace('~', $SyncthingSystem.tilde) # Resolve tilde if present
+$global:InputFolder = $global:InputFolder.Replace('~', $SyncthingSystem.tilde) # Resolve tilde if present
 
 function Write-ProstLog {
     param (
