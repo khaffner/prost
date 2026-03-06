@@ -1,5 +1,6 @@
 #Requires -Version 7.6
 $ErrorActionPreference = "Stop"
+$ProstVersion = "0.1.0" #x-release-please-version
 
 $SyncthingSystem = & "syncthing" "cli" "show" "system" | ConvertFrom-Json
 $global:ID = $SyncthingSystem.myID.Split("-")[0]
@@ -17,7 +18,7 @@ function Write-ProstLog {
         [string]$Message
     )
     $Timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-    "[$Timestamp] [$global:ID] [$global:HostName] $Message" | Out-File -FilePath "$global:OutputFolder/$global:ID.log" -Append -Encoding UTF8 -Force
+    "[$Timestamp] [$ProstVersion] [$global:ID] [$global:HostName] $Message" | Out-File -FilePath "$global:OutputFolder/$global:ID.log" -Append -Encoding UTF8 -Force
 }
 
 # Make sure there is enough free space on the drive to write logs and output. Say 1GB.
