@@ -1,0 +1,75 @@
+name: Check PowerShell 7.6 Release
+
+on:
+  schedule:
+    - cron: '0 12 * * *'  # Run daily at noon UTC
+  workflow_dispatch:  # Allow manual trigger for testing
+
+jobs:
+  check-upgrade:
+    runs-on: ubuntu-latest
+    name: Check for PowerShell 7.6 Stable
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check PowerShell Releases
+        id: check
+        run: |
+          echo "Checking PowerShell releases for 7.6 stable..."
+          
+          # Get latest releases from PowerShell repo
+          RELEASES=$(curl -s https://api.github.com/repos/PowerShell/PowerShell/releases)
+          
+          # Check if 7.6.0 stable exists (not preview/rc)
+          STABLE_76=$(echo "$RELEASES" | jq -r '.[] | select(.tag_name | test("^v7\\.6\\.0$")) | .tag_name')
+          
+          if [ -n "$STABLE_76" ]; then
+            echo "found=true" >> $GITHUB_OUTPUT
+            echo "version=$STABLE_76" >> $GITHUB_OUTPUT
+            echo "✅ Found PowerShell 7.6 stable: $STABLE_76"
+            
+            # Check if issue already exists
+            EXISTING_ISSUE=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              "https://api.github.com/repos/${{ github.repository }}/issues?state=open&labels=powershell-upgrade" \
+              | jq -r '.[0].number // empty')
+            
+            if [ -n "$EXISTING_ISSUE" ]; then
+              echo "issue_exists=true" >> $GITHUB_OUTPUT
+              echo "⏭️ Issue already exists: #$EXISTING_ISSUE"
+            else
+              echo "issue_exists=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "found=false" >> $GITHUB_OUTPUT
+            echo "⏳ PowerShell 7.6 stable not yet released"
+          fi
+
+      - name: Create Issue
+        if: steps.check.outputs.found == 'true' && steps.check.outputs.issue_exists != 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '🚀 PowerShell 7.6 Stable Released - Upgrade Required',
+              body: `## PowerShell 7.6 is now stable! 🎉
+            
+            PowerShell **${{ steps.check.outputs.version }}** has been released as stable.
+            
+            ### What needs updating:
+            - [ ] README.MD badge (\`7.4+\` → \`7.6+\`)
+            - [ ] .github/workflows/ci.yml (\`lts-7.4-ubuntu\` → \`lts-7.6-ubuntu\`)
+            - [ ] All \`*.ps1\` files with \`#Requires -Version 7.4\`
+            - [ ] CONTRIBUTING.md (\`7.4+\` → \`7.6+\`)
+            
+            ### Release Notes
+            https://github.com/PowerShell/PowerShell/releases/tag/${{ steps.check.outputs.version }}
+            
+            ---
+            *This issue was automatically created by the PowerShell upgrade checker workflow.*`,
+              labels: ['powershell-upgrade', 'dependencies'],
+              assignees: ['khaffner']
+            });
+            console.log(`✅ Created issue #${issue.data.number}`);
+
