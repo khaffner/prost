@@ -127,23 +127,6 @@ flowchart TD
 
 ---
 
-## 🧪 Development & Testing
-
-Before committing changes, run the test suite locally:
-
-```bash
-pwsh .github/test.ps1
-```
-
-This runs the same checks as the CI pipeline:
-- **PSScriptAnalyzer** - Code quality and best practices
-- **Syntax validation** - Ensures all scripts parse correctly
-- **CSV validation** - Checks assignments.csv format
-- **Security analysis** - Scans for common security issues
-
-Tests run automatically on every push and pull request via GitHub Actions.
-
----
 
 <div align="center">
   <strong>🍻 Prost!</strong>
