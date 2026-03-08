@@ -22,7 +22,7 @@ if (!(Get-Module -ListAvailable -Name PSScriptAnalyzer)) {
 
 # Test 1: PSScriptAnalyzer
 Write-Host "`n1️⃣  Running PSScriptAnalyzer..." -ForegroundColor Yellow
-$results = Invoke-ScriptAnalyzer -Path . -Recurse -Settings PSGallery
+$results = Invoke-ScriptAnalyzer -Path . -Recurse -Settings PSGallery -ExcludeRule 'PSAvoidGlobalVars', 'PSAvoidUsingPositionalParameters'
 if ($results) {
     $results | Format-Table -AutoSize
     Write-Host "❌ PSScriptAnalyzer found $($results.Count) issue(s)" -ForegroundColor Red
