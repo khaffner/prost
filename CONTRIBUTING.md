@@ -21,7 +21,7 @@ Thanks for your interest in contributing! 🍻
 Always run the test suite locally:
 
 ```bash
-pwsh test.ps1
+pwsh .github/test.ps1
 ```
 
 This ensures:
@@ -47,7 +47,7 @@ If you're modifying:
 
 ## Pull Request Process
 
-1. Ensure all tests pass (`pwsh test.ps1`)
+1. Ensure all tests pass (`pwsh .github/test.ps1`)
 2. Update README.MD if adding features
 3. Commit with descriptive messages (we use [Conventional Commits](https://www.conventionalcommits.org/))
 4. Push to your fork

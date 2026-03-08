@@ -132,7 +132,7 @@ flowchart TD
 Before committing changes, run the test suite locally:
 
 ```bash
-pwsh test.ps1
+pwsh .github/test.ps1
 ```
 
 This runs the same checks as the CI pipeline:
