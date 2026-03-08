@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.2.0](https://github.com/khaffner/prost/compare/0.1.2...0.2.0) (2026-03-08)
+
+
+### Features
+
+* AI generated tests, docs and change pwsh version to current LTS 7.4 ([4e087c8](https://github.com/khaffner/prost/commit/4e087c84a00621cd9bb20d25f6adeab4e3d2b8ab))
+
+
+### Bug Fixes
+
+* Add systemd/journal logging ([2fd8456](https://github.com/khaffner/prost/commit/2fd845615fb152d0ec2a3a745fb7318934150cc2))
+* Add test dependency chain ([97bb765](https://github.com/khaffner/prost/commit/97bb765bc85cfd30f371a353bff7a1ae719a76cd))
+* Exclude these rules ([18bd59b](https://github.com/khaffner/prost/commit/18bd59bbd75b4af7fdaa6ec11fee938b0cc21f16))
+* Remove duplicate ci ([b324bc1](https://github.com/khaffner/prost/commit/b324bc1903183d552ba970dffd9ece83aab41378))
+
 ## [0.1.2](https://github.com/khaffner/prost/compare/0.1.1...0.1.2) (2026-03-06)
 
 
