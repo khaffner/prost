@@ -2,6 +2,14 @@
 <div align="center">
   <h1>🍻 Prost</h1>
   <strong>(WIP)<br>Payload runner over Syncthing<br>"Prost" means "Cheers" in German so there's also that.</strong>
+  
+  <br><br>
+  
+  [![CI](https://github.com/khaffner/prost/actions/workflows/test.yml/badge.svg)](https://github.com/khaffner/prost/actions/workflows/test.yml)
+  [![Release](https://github.com/khaffner/prost/actions/workflows/release.yml/badge.svg)](https://github.com/khaffner/prost/actions/workflows/release.yml)
+  [![PowerShell](https://img.shields.io/badge/PowerShell-7.4+-blue.svg)](https://github.com/PowerShell/PowerShell)
+  [![Syncthing](https://img.shields.io/badge/Syncthing-required-green.svg)](https://syncthing.net/)
+  
 </div>
 
 
@@ -36,7 +44,7 @@ Not for enterprises. Use Chef, Ansible, etc. Prost is my weird idea after being 
 - **Syncthing**
   - Should run as a service at boot
   - `root` must be able to run `syncthing cli show system` at all times
-- **PowerShell 7.6+**
+- **PowerShell 7.4+**
   - Latest LTS (only version properly supported by Debian 13)
   - PowerShell <3
     - Don't worry, other languages are also supported as payloads
@@ -98,6 +106,24 @@ flowchart TD
 
   minput --Send only-->sinput--Hourly systemd task-->run.ps1 -->nodeinfo.ps1-->soutput<--Send & Receive-->moutput
 ```
+
+---
+
+## 🧪 Development & Testing
+
+Before committing changes, run the test suite locally:
+
+```bash
+pwsh test.ps1
+```
+
+This runs the same checks as the CI pipeline:
+- **PSScriptAnalyzer** - Code quality and best practices
+- **Syntax validation** - Ensures all scripts parse correctly
+- **CSV validation** - Checks assignments.csv format
+- **Security analysis** - Scans for common security issues
+
+Tests run automatically on every push and pull request via GitHub Actions.
 
 ---
 

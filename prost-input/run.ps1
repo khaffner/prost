@@ -1,4 +1,4 @@
-#Requires -Version 7.6
+#Requires -Version 7.4
 $ErrorActionPreference = "Stop"
 $ProstVersion = "0.1.2" #x-release-please-version
 
