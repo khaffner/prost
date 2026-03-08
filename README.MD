@@ -5,8 +5,7 @@
   
   <br><br>
   
-  [![CI](https://github.com/khaffner/prost/actions/workflows/test.yml/badge.svg)](https://github.com/khaffner/prost/actions/workflows/test.yml)
-  [![Release](https://github.com/khaffner/prost/actions/workflows/release.yml/badge.svg)](https://github.com/khaffner/prost/actions/workflows/release.yml)
+  [![CI](https://github.com/khaffner/prost/actions/workflows/ci.yml/badge.svg)](https://github.com/khaffner/prost/actions/workflows/ci.yml)
   [![PowerShell](https://img.shields.io/badge/PowerShell-7.4+-blue.svg)](https://github.com/PowerShell/PowerShell)
   [![Syncthing](https://img.shields.io/badge/Syncthing-required-green.svg)](https://syncthing.net/)
   
